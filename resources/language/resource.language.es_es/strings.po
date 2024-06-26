@@ -1,15 +1,15 @@
 # Kodi Media Center language file
-# Addon Name: Filmin
-# Addon id: plugin.video.filmin
-# Addon Provider: pablouser1
+# Addon Name: eFilm
+# Addon id: plugin.video.efilm
+# Addon Provider: ptibanez
 msgid ""
 msgstr ""
-"Project-Id-Version: FILMIN\n"
-"Report-Msgid-Bugs-To: https://github.com/pablouser1/plugin.video.filmin/issues/\n"
+"Project-Id-Version: EFILM\n"
+"Report-Msgid-Bugs-To: https://github.com/ptibanez/plugin.video.efilm/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Pablo Ferreiro\n"
-"Language-Team: Spanish (Spain) Pablo Ferreiro\n"
+"Last-Translator: Pedro Tomás\n"
+"Language-Team: Spanish (Spain) Pedro Tomás\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +27,7 @@ msgstr "Funciones"
 
 msgctxt "#40002"
 msgid "Region"
-msgstr "Región"
+msgstr "Plataforma"
 
 msgctxt "#40003"
 msgid "Allow syncing with Filmin"
@@ -117,8 +117,8 @@ msgstr "Ver después"
 
 # -- session.py -- #
 msgctxt "#40030"
-msgid "Write your username/email"
-msgstr "Escribe tu nombre de usuario/correo electrónico"
+msgid "Write your username"
+msgstr "Escribe tu nombre de usuario"
 
 msgctxt "#40031"
 msgid "Write your password"

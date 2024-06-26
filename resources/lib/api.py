@@ -10,37 +10,24 @@ from .helpers.headers import Headers
 
 class Api:
     """
-    Class for handling API calls to Filmin
-    TODO: Split class into modules
+    Class for handling API calls to eFilm
     """
 
     s = requests.Session()
 
-    # Taken from es.filmin.app.BuildConfig
     TOKENS = {
-        # Spain
-        "es": {
-            "CLIENT_ID": "zXZXrpum7ayGcWlo",
-            "CLIENT_SECRET": "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm",
-        },
-        # Portugal
-        "pt": {
-            "CLIENT_ID": "zhiv2IKILLYNZ3pq",
-            "CLIENT_SECRET": "kzPKMK2aXJzFoHNWOCR6gcd60WTK1BL3",
-        },
-        # México
-        "mx": {
-            "CLIENT_ID": "sse7QwjpcNoZgGZO",
-            "CLIENT_SECRET": "2yqTm7thQLc2NQUQSbKehn7xrg1Pi59q",
-        },
+        "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía": {
+            "CLIENT_ID": 134 #,
+            #"CLIENT_SECRET": "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm",
+        }
     }
 
-    LIMIT = 20
+    #LIMIT = 20
 
-    client_id = ""
-    client_secret = ""
+    client_id = 134
+    #client_secret = ""
 
-    domain = "es"
+    domain = "ANDALUCIA.EFILM"
 
     def __init__(self, domain: str):
         # Set headers
@@ -50,28 +37,23 @@ class Api:
 
         self.set_domain(domain)
 
-        self.s.headers["X-Client-Id"] = self.client_id
+        #self.s.headers["X-Client-Id"] = self.client_id
 
-    def _get_base_url(self, uapi: bool = False) -> str:
+    def _get_base_url(self) -> str:
         """
         Get the base URL used depending on your domain
-
-        Parameters:
-            uapi - Use new Filmin Api
-        Source:
-            es.filmin.app.injector.modules.RestApiUrlProviderEx
         """
 
-        subdomain = "uapi" if uapi else "api"
-        host = "filminlatino" if self.domain == "mx" else "filmin"
-        return f"https://{subdomain}.{host}.{self.domain}"
+        #subdomain = "uapi" if uapi else "api"
+        #host = "filminlatino" if self.domain == "mx" else "filmin"
+        #return f"https://{subdomain}.{host}.{self.domain}"
+        return f"https://backend-prod.efilm.online/api/v1"
 
     def _req(
         self,
         endpoint: str,
         body: dict = None,
-        query: dict = None,
-        uapi: bool = False
+        query: dict = None 
     ):
         """
         Sends the request
@@ -82,7 +64,7 @@ class Api:
         if body is not None:
             method = "POST"
 
-        base_url = self._get_base_url(uapi)
+        base_url = self._get_base_url()
         res = self.s.request(
             method,
             base_url + endpoint,
@@ -97,23 +79,19 @@ class Api:
         if res.ok:
             return res_json
 
-        if uapi:
-            raise UApiException(res_json["error"])
         raise ApiV3Exception(res_json["errors"])
 
     def login(self, username: str, password: str) -> dict:
         """
-        Login into Filmin using a username and a password
+        Login into eFilm using a username and a password
         """
 
         res = self._req(
-            "/oauth/access_token",
+            "/auth",
             body={
-                "client_id": self.client_id,
-                "client_secret": self.client_secret,
-                "grant_type": "password",
+                "id_client": self.client_id,
                 "password": password,
-                "username": username,
+                "username": username
             },
         )
         return res
@@ -132,7 +110,7 @@ class Api:
         Returns void
         """
 
-        self._req("/oauth/logout", body={})
+        self._req("/logout", body={})
 
     def user(self):
         """
@@ -353,7 +331,7 @@ class Api:
         self.domain = domain
         tokens = self.TOKENS[domain]
         self.client_id = tokens["CLIENT_ID"]
-        self.client_secret = tokens["CLIENT_SECRET"]
+        #self.client_secret = tokens["CLIENT_SECRET"]
 
     def _paginated_query(self, query: dict, page: int) -> dict:
         new_query = {

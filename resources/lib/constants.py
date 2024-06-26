@@ -30,4 +30,4 @@ class MediaTypes(Enum):
     VIDEOS = ("short", "film", "episode")
     FOLDERS = ("serie", "season")
 
-Domains = ["es", "pt", "mx"]
+Domains = ["ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"]

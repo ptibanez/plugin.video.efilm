@@ -10,7 +10,7 @@ class Settings:
     Settings wrapper
     """
 
-    addon = Addon("plugin.video.filmin")
+    addon = Addon("plugin.video.efilm")
 
     def get_localized_string(self, l_id: int) -> str:
         """
@@ -30,7 +30,7 @@ class Settings:
 
     def get_domain(self) -> str:
         """
-        Get Filmin domain
+        Get eFilm domain
         """
 
         return self.addon.getSettingString("domain")
