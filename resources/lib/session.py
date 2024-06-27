@@ -18,11 +18,15 @@ def ask_login():
     password = Dialog().input(settings.get_localized_string(40031))
     if username and password:
         res = api.login(username, password)
-        api.set_token(res["access_token"])
+        #api.set_token(res["access_token"])
+        api.set_token(res["access"])
         change_profile()
         user = api.user()
+        # settings.set_auth(
+        #     res["access_token"], res["refresh_token"], username, user["id"]
+        # )
         settings.set_auth(
-            res["access_token"], res["refresh_token"], username, user["id"]
+            res["access"], res["refresh"], username, user["id"]
         )
         Dialog().ok("OK", settings.get_localized_string(40032))
 

@@ -1,8 +1,7 @@
 """ HTTPS Api for Filmin """
 
 import requests
-from .exceptions.apiv3 import ApiV3Exception
-from .exceptions.uapi import UApiException
+from .exceptions.api import ApiException
 from .exceptions.dialog import DialogException
 from .helpers.misc import is_drm
 from .helpers.headers import Headers
@@ -79,7 +78,7 @@ class Api:
         if res.ok:
             return res_json
 
-        raise ApiV3Exception(res_json["errors"])
+        raise ApiException(res_json["errors"])
 
     def login(self, username: str, password: str) -> dict:
         """
