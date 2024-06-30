@@ -21,12 +21,12 @@ class Api:
         }
     }
 
-    #LIMIT = 20
+    LIMIT = 20
 
     client_id = 134
     #client_secret = ""
 
-    domain = "ANDALUCIA.EFILM"
+    domain = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 
     def __init__(self, domain: str):
         # Set headers
@@ -78,7 +78,7 @@ class Api:
         if res.ok:
             return res_json
 
-        raise ApiException(res_json["errors"])
+        raise ApiException(res_json["detail"])
 
     def login(self, username: str, password: str) -> dict:
         """
@@ -86,7 +86,7 @@ class Api:
         """
 
         res = self._req(
-            "/auth",
+            "/auth/",
             body={
                 "id_client": self.client_id,
                 "password": password,
@@ -99,25 +99,25 @@ class Api:
         """
         Get all profiles available
         """
-
-        res = self._req("/auth/profiles", uapi=True)
+    
+        res = self._req("/auth/profiles/") #, uapi=True)
         return res
 
     def logout(self):
         """
-        Logout of Filmin
+        Logout of eFilm
         Returns void
         """
 
-        self._req("/logout", body={})
+        self._req("/logout/", body={})
 
-    def user(self):
-        """
-        Get user data
-        """
-
-        res = self._req(endpoint="/user")
-        return res["data"]
+    # def user(self):
+    #     """
+    #     Get user data
+    #     """
+    #
+    #     res = self._req(endpoint="/user/")
+    #     return res["data"]
 
     def genres(self):
         """

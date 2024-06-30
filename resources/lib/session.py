@@ -20,8 +20,9 @@ def ask_login():
         res = api.login(username, password)
         #api.set_token(res["access_token"])
         api.set_token(res["access"])
-        change_profile()
-        user = api.user()
+        # change_profile()
+        #user = api.user()
+        user = res["user"]
         # settings.set_auth(
         #     res["access_token"], res["refresh_token"], username, user["id"]
         # )
@@ -31,28 +32,28 @@ def ask_login():
         Dialog().ok("OK", settings.get_localized_string(40032))
 
 
-def change_profile(notify: bool = False):
-    """
-    Gets all user's profiles and asks the user to choose one
-    If succesful save to memory and disk
-    """
-
-    items = []
-    res = api.profiles()
-
-    profiles = res["data"]
-
-    for profile in profiles:
-        item = ListItem(label=profile["name"])
-        items.append(item)
-    index = Dialog().select(settings.get_localized_string(40033), items)
-    profile_id = profiles[index]["id"]
-
-    api.set_profile_id(profile_id)
-    settings.set_profile_id(profile_id)
-
-    if notify:
-        Dialog().ok("OK", settings.get_localized_string(40034))
+# def change_profile(notify: bool = False):
+#     """
+#     Gets all user's profiles and asks the user to choose one
+#     If succesful save to memory and disk
+#     """
+#
+#     items = []
+#     res = api.profiles()
+#
+#     profiles = res["data"]
+#
+#     for profile in profiles:
+#         item = ListItem(label=profile["name"])
+#         items.append(item)
+#     index = Dialog().select(settings.get_localized_string(40033), items)
+#     profile_id = profiles[index]["id"]
+#
+#     api.set_profile_id(profile_id)
+#     settings.set_profile_id(profile_id)
+#
+#     if notify:
+#         Dialog().ok("OK", settings.get_localized_string(40034))
 
 
 def ask_domain():

@@ -12,7 +12,7 @@ def prettyPrint(data):
     print(json.dumps(data, indent=2))
 
 
-DOMAIN = "es"
+DOMAIN = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 
 api = Api(DOMAIN)
 

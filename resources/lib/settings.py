@@ -24,7 +24,7 @@ class Settings:
         Check if user has already has an access token
         """
 
-        if self.addon.getSettingString("access_token"):
+        if self.addon.getSettingString("access"):
             return True
         return False
 
@@ -91,7 +91,7 @@ class Settings:
         """
         Saves profile id to disk
         """
-
+    
         self.addon.setSettingString("profile_id", profile_id)
 
     def set_domain(self, domain: str):
