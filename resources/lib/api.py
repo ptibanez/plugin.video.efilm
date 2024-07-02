@@ -1,10 +1,11 @@
-""" HTTPS Api for Filmin """
+""" HTTPS Api for eFilm """
 
 import requests
 from .exceptions.api import ApiException
 from .exceptions.dialog import DialogException
 from .helpers.misc import is_drm
 from .helpers.headers import Headers
+import logging
 
 
 class Api:
@@ -70,6 +71,9 @@ class Api:
             json=body,
             params=query
         )
+        
+        self.logger.info(res)
+        
         # Avoid non JSON response
         if res.headers.get("Content-Type") != "application/json":
             raise DialogException("Non JSON response")
