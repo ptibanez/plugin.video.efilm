@@ -23,10 +23,7 @@ class MainMenu(Base):
             "id": Routes.CATALOG.value,
             "title": settings.get_localized_string(40022)
         },
-        {
-            "id": Routes.PURCHASED.value,
-            "title": settings.get_localized_string(40023)
-        },
+
         {
             "id": Routes.HIGHLIGHTEDS.value,
             "title": settings.get_localized_string(40024),
@@ -42,5 +39,9 @@ class MainMenu(Base):
         {
             "id": Routes.WATCHLATER.value,
             "title": settings.get_localized_string(40027)
+        },
+        {
+            "id": Routes.PURCHASED.value,
+            "title": settings.get_localized_string(40023)
         }
     ]

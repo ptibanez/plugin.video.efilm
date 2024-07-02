@@ -96,8 +96,8 @@ msgid "Catalog"
 msgstr "Catálogo"
 
 msgctxt "#40023"
-msgid "Purchased"
-msgstr "Comprado"
+msgid "Loans"
+msgstr "Préstamos"
 
 msgctxt "#40024"
 msgid "Highlighteds"

@@ -98,7 +98,7 @@ def _logout():
     from .session import start_logout
     start_logout()
 
-# perfil
+# perfil ¿?
 @dispatcher.register(Routes.PROFILE)
 def _profile():
     from .session import change_profile

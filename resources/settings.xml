@@ -62,13 +62,13 @@
 	      	<heading>40002</heading>
 	      </control>
         </setting>
-        <setting id="change_profile" type="action" label="40015">
+        <!-- <setting id="change_profile" type="action" label="40015">
           <level>0</level>
           <data>RunPlugin(plugin://$ID?route=profile)</data>
           <control type="button" format="action">
             <close>true</close>
           </control>
-        </setting>
+        </setting>-->
         <setting id="logout" type="action" label="40016">
           <level>0</level>
           <data>RunPlugin(plugin://$ID?route=logout)</data>

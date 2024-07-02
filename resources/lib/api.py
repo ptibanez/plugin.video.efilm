@@ -16,15 +16,15 @@ class Api:
 
     TOKENS = {
         "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía": {
-            "CLIENT_ID": 134 #,
-            #"CLIENT_SECRET": "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm",
+            "CLIENT_ID": 134  # ,
+            # "CLIENT_SECRET": "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm",
         }
     }
 
     LIMIT = 20
 
     client_id = 134
-    #client_secret = ""
+    # client_secret = ""
 
     domain = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 
@@ -36,23 +36,23 @@ class Api:
 
         self.set_domain(domain)
 
-        #self.s.headers["X-Client-Id"] = self.client_id
+        self.s.headers["X-Client-Id"] = str(self.client_id)
 
     def _get_base_url(self) -> str:
         """
         Get the base URL used depending on your domain
         """
 
-        #subdomain = "uapi" if uapi else "api"
-        #host = "filminlatino" if self.domain == "mx" else "filmin"
-        #return f"https://{subdomain}.{host}.{self.domain}"
+        # subdomain = "uapi" if uapi else "api"
+        # host = "filminlatino" if self.domain == "mx" else "filmin"
+        # return f"https://{subdomain}.{host}.{self.domain}"
         return f"https://backend-prod.efilm.online/api/v1"
 
     def _req(
         self,
         endpoint: str,
-        body: dict = None,
-        query: dict = None 
+        body: dict=None,
+        query: dict=None 
     ):
         """
         Sends the request
@@ -100,7 +100,7 @@ class Api:
         Get all profiles available
         """
     
-        res = self._req("/auth/profiles/") #, uapi=True)
+        res = self._req("/auth/profiles/")  # , uapi=True)
         return res
 
     def logout(self):
@@ -130,9 +130,9 @@ class Api:
     def catalog(
         self,
         page: int,
-        item_type: str = "",
-        genre: int = -1,
-        subgenre: int = -1
+        item_type: str="",
+        genre: int=-1,
+        subgenre: int=-1
     ):
         """
         Filter media available by genre and subgenre
@@ -175,8 +175,8 @@ class Api:
         Get all media purchased
         """
 
-        res = self._req(endpoint="/user/purchased/medias")
-        return res["data"]
+        res = self._req(endpoint="/loans/loans/actives/?order_by=-recent&page_size=5&page=1")
+        return res 
 
     def highlighteds(self) -> list:
         """
@@ -313,7 +313,7 @@ class Api:
         Add auth token to HTTP session header
         """
 
-        self.s.headers["Authorization"] = f"Bearer {token}"
+        self.s.headers["Authorization"] = f"JWT {token}"
 
     def set_profile_id(self, profile_id: str):
         """
@@ -330,7 +330,7 @@ class Api:
         self.domain = domain
         tokens = self.TOKENS[domain]
         self.client_id = tokens["CLIENT_ID"]
-        #self.client_secret = tokens["CLIENT_SECRET"]
+        # self.client_secret = tokens["CLIENT_SECRET"]
 
     def _paginated_query(self, query: dict, page: int) -> dict:
         new_query = {

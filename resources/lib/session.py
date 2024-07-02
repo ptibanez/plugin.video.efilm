@@ -29,6 +29,9 @@ def ask_login():
         settings.set_auth(
             res["access"], res["refresh"], username, user["id"]
         )
+        profile_id = str(res["profile"])
+        api.set_profile_id(profile_id)
+        settings.set_profile_id(profile_id)
         Dialog().ok("OK", settings.get_localized_string(40032))
 
 

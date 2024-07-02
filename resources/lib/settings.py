@@ -24,7 +24,7 @@ class Settings:
         Check if user has already has an access token
         """
 
-        if self.addon.getSettingString("access"):
+        if self.addon.getSettingString("access_token"):
             return True
         return False
 
