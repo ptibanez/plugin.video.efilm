@@ -32,7 +32,7 @@ class Render:
     @staticmethod
     def videos(items: list) -> list:
         """
-        Render videos fetched from Filmin API
+        Render videos fetched from eFilm API
         """
 
         listing = []
