@@ -42,6 +42,10 @@ msgid "Enable UpNext integration (WIP)"
 msgstr "Habilitar integración con UpNext (EN DESARROLLO)"
 
 # -- Login config -- #
+msgctxt "#40009"
+msgid "Remaining loans"
+msgstr "Préstamos pendientes"
+
 msgctxt "#40010"
 msgid "Login"
 msgstr "Sesión"
@@ -189,3 +193,16 @@ msgstr "Elige una versión"
 msgctxt "#40053"
 msgid "This item is not available"
 msgstr "No disponible"
+
+# -- Translations -- #
+msgctxt "#42242"
+msgid "season"
+msgstr "temporada"
+
+msgctxt "#42362"
+msgid "number"
+msgstr "episodio"
+
+msgctxt "#42272"
+msgid "director"
+msgstr "director"

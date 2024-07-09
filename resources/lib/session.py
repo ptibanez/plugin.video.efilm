@@ -18,45 +18,16 @@ def ask_login():
     password = Dialog().input(settings.get_localized_string(40031))
     if username and password:
         res = api.login(username, password)
-        #api.set_token(res["access_token"])
         api.set_token(res["access"])
-        # change_profile()
-        #user = api.user()
         user = res["user"]
-        # settings.set_auth(
-        #     res["access_token"], res["refresh_token"], username, user["id"]
-        # )
         settings.set_auth(
             res["access"], res["refresh"], username, user["id"]
         )
         profile_id = str(res["profile"])
         api.set_profile_id(profile_id)
         settings.set_profile_id(profile_id)
+        settings.set_remaining_loans(user["remaining_loans"])
         Dialog().ok("OK", settings.get_localized_string(40032))
-
-
-# def change_profile(notify: bool = False):
-#     """
-#     Gets all user's profiles and asks the user to choose one
-#     If succesful save to memory and disk
-#     """
-#
-#     items = []
-#     res = api.profiles()
-#
-#     profiles = res["data"]
-#
-#     for profile in profiles:
-#         item = ListItem(label=profile["name"])
-#         items.append(item)
-#     index = Dialog().select(settings.get_localized_string(40033), items)
-#     profile_id = profiles[index]["id"]
-#
-#     api.set_profile_id(profile_id)
-#     settings.set_profile_id(profile_id)
-#
-#     if notify:
-#         Dialog().ok("OK", settings.get_localized_string(40034))
 
 
 def ask_domain():

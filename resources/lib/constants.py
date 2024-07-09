@@ -27,7 +27,10 @@ class Routes(Enum):
 class MediaTypes(Enum):
     """List of available media types"""
 
-    VIDEOS = ("short", "film", "episode")
-    FOLDERS = ("serie", "season")
+    #VIDEOS = ("short", "film", "episode")
+    VIDEOS = ("serie", "audiovisual")
+    #FOLDERS = ("serie", "season")
+    FOLDERS = ("season")
+
 
 Domains = ["ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"]

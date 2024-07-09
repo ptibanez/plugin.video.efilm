@@ -100,3 +100,17 @@ class Settings:
         """
 
         self.addon.setSettingString("domain", domain)
+        
+    def set_remaining_loans(self, remaining_loans: int):
+        """
+        Saves remaining_loans to disk
+        """
+
+        self.addon.setSettingInt("remaining_loans", remaining_loans)
+        
+    def get_remaining_loans(self) -> int:
+        """
+        Get remaining_loans 
+        """
+
+        return self.addon.getSettingInt("remaining_loans")

@@ -76,6 +76,15 @@
             <close>true</close>
           </control>
         </setting>
+        <setting id="remaining_loans" type="integer" label="40009">
+          <level>0</level>
+          <default>0</default>
+          <enable>false</enable>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="integer" />
+        </setting>        
       </group>
       <group id="tokens" label="40019">
         <setting id="access_token" type="string" label="40017">

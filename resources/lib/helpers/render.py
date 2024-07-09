@@ -58,7 +58,7 @@ class Render:
         listing = []
         for item in items:
             if not route:
-                if item["type"] == MediaTypes.FOLDERS.value[0]:
+                if item["product_type"] == MediaTypes.FOLDERS.value[0]:
                     route = Routes.SEASONS.value
 
             query = {
@@ -88,7 +88,7 @@ class Render:
         videos = []
         folders = []
         for item in items:
-            if item["type"] in MediaTypes.VIDEOS.value:
+            if item["product_type"] in MediaTypes.VIDEOS.value:
                 videos.append(item)
             else:
                 folders.append(item)

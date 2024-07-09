@@ -16,15 +16,13 @@ class Api:
 
     TOKENS = {
         "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía": {
-            "CLIENT_ID": 134  # ,
-            # "CLIENT_SECRET": "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm",
+            "CLIENT_ID": 134  
         }
     }
 
     LIMIT = 20
 
     client_id = 134
-    # client_secret = ""
 
     domain = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 
@@ -43,9 +41,6 @@ class Api:
         Get the base URL used depending on your domain
         """
 
-        # subdomain = "uapi" if uapi else "api"
-        # host = "filminlatino" if self.domain == "mx" else "filmin"
-        # return f"https://{subdomain}.{host}.{self.domain}"
         return f"https://backend-prod.efilm.online/api/v1"
 
     def _req(
@@ -111,14 +106,6 @@ class Api:
         """
 
         self._req("/logout/", body={})
-
-    # def user(self):
-    #     """
-    #     Get user data
-    #     """
-    #
-    #     res = self._req(endpoint="/user/")
-    #     return res["data"]
 
     def genres(self):
         """
@@ -331,7 +318,6 @@ class Api:
         self.domain = domain
         tokens = self.TOKENS[domain]
         self.client_id = tokens["CLIENT_ID"]
-        # self.client_secret = tokens["CLIENT_SECRET"]
 
     def _paginated_query(self, query: dict, page: int) -> dict:
         new_query = {
