@@ -85,7 +85,7 @@ def _watch_later():
     from .views.watchlater import WatchLater
     WatchLater().run()
 
-# ¿?
+# ver vídeo
 @dispatcher.register(Routes.PLAYER, ["id"])
 def _player(item_id: int):
     from .player.handler import PlayHandler

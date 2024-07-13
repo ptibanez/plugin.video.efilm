@@ -26,7 +26,7 @@ def ask_login():
         profile_id = str(res["profile"])
         api.set_profile_id(profile_id)
         settings.set_profile_id(profile_id)
-        settings.set_remaining_loans(user["remaining_loans"])
+        #settings.set_remaining_loans(user["remaining_loans"])
         Dialog().ok("OK", settings.get_localized_string(40032))
 
 

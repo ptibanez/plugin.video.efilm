@@ -57,19 +57,19 @@ class Settings:
 
         return self.addon.getSettingString("profile_id")
 
-    def can_buy(self) -> bool:
-        """
-        Check if user allows to rent media using tickets
-        """
-
-        return self.addon.getSettingBool("tickets")
-
-    def can_sync(self) -> bool:
-        """
-        Check if user allows to send current play position of media
-        """
-
-        return self.addon.getSettingBool("sync")
+    # def can_buy(self) -> bool:
+    #     """
+    #     Check if user allows to rent media using tickets
+    #     """
+    #
+    #     return self.addon.getSettingBool("tickets")
+    #
+    # def can_sync(self) -> bool:
+    #     """
+    #     Check if user allows to send current play position of media
+    #     """
+    #
+    #     return self.addon.getSettingBool("sync")
 
     def set_auth(
         self,
@@ -101,16 +101,16 @@ class Settings:
 
         self.addon.setSettingString("domain", domain)
         
-    def set_remaining_loans(self, remaining_loans: int):
-        """
-        Saves remaining_loans to disk
-        """
-
-        self.addon.setSettingInt("remaining_loans", remaining_loans)
-        
-    def get_remaining_loans(self) -> int:
-        """
-        Get remaining_loans 
-        """
-
-        return self.addon.getSettingInt("remaining_loans")
+    # def set_remaining_loans(self, remaining_loans: int):
+    #     """
+    #     Saves remaining_loans to disk
+    #     """
+    #
+    #     self.addon.setSettingInt("remaining_loans", remaining_loans)
+    #
+    # def get_remaining_loans(self) -> int:
+    #     """
+    #     Get remaining_loans 
+    #     """
+    #
+    #     return self.addon.getSettingInt("remaining_loans")

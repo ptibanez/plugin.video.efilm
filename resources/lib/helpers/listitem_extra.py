@@ -5,6 +5,7 @@ from .art import Art
 from ..common import settings
 from datetime import datetime
 import hashlib
+from ..models.video import Video
 
 
 class ListItemExtra:
@@ -14,36 +15,39 @@ class ListItemExtra:
     def subinfoToStr(subinfo: dict) -> str:
         subinfoToStr = ""
         for key, value in subinfo.items():
-            print("subinfoToStr: " + key + " " + str(sum(map(ord, hashlib.md5(key.encode('utf-8')).hexdigest())) + 40053))
             keyTranslated = settings.get_localized_string(sum(map(ord, hashlib.md5(key.encode('utf-8')).hexdigest())) + 40053)
-            subinfoToStr += f'{keyTranslated}: {value}, '
+            subinfoToStr += f' - {keyTranslated}: {value}'
         return subinfoToStr
     
     @staticmethod
     def expireToStr(expire: str) -> str:
-        return "vence: " + datetime.fromisoformat(expire).strftime("%d/%m/%Y a las %H:%M")
+        return " - vence: " + datetime.fromisoformat(expire).strftime("%d/%m/%Y a las %H:%M")
 
     @staticmethod
-    def video(url: str, item: dict) -> ListItem:
+    def video(url: str, video: Video) -> ListItem:
         """ListItem for individual video"""
-
-        list_item = ListItem(item["name_product"], path=url)
+        list_item = ListItem(video.name, path=url)
+        
+        title = video.name
+        if video.subinfo:
+           title += ListItemExtra.subinfoToStr(video.subinfo)
+           
+        if video.expire:
+           title += ListItemExtra.expireToStr(video.expire)  
+        
         info = {
-            "title": item["name_product"] 
-                             + " (" 
-                             + ListItemExtra.subinfoToStr(item["subinfo"]) 
-                             + ListItemExtra.expireToStr(item["expire"])
-                             + ")",
-            #"year": item["year"],
-            #"plot": item["excerpt"],
-            #"director": (item["subinfo"]["director"]) if item["subinfo"]["director"] else "" #,
+            "title": title,
+            "year": video.year,
+            "plot": "probando",
+            "director": video.director
             #"rating": item["avg_votes"],
             # Filmin returns duration in minutes, Kodi wants it in seconds
             #"duration": item["duration_in_minutes"] * 60,
+            
         }
         list_item.setInfo("video", info)
         # ART
-        list_item.setArt(Art.api(item))
+        list_item.setArt(Art.api(video))
 
         # Common
         list_item.setProperty("isPlayable", "true")

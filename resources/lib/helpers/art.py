@@ -1,5 +1,5 @@
 """ Art module """
-
+from ..models.video import Video
 
 class Art:
     """
@@ -7,15 +7,15 @@ class Art:
     """
 
     @staticmethod
-    def api(item: dict) -> dict:
+    def api(video: Video) -> dict:
         
-        thumb = item.get("cover")
-        poster = item.get("cover")
-        fanart = item.get("cover")
-        banner = item.get("cover")
-        landscape = item.get("cover")
-        icon = item.get("cover")
-        highlighted = item.get("cover")
+        thumb = video.cover
+        poster = video.cover
+        fanart = video.cover
+        banner = video.cover
+        landscape = video.cover
+        icon = video.cover
+        highlighted = video.cover
 
         if highlighted is not None:
             if banner is None:

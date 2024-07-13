@@ -158,12 +158,13 @@ class Api:
         # Return only media
         return [o for o in res["data"]["items"] if o.get('_type') == 'Media']
 
-    def purchased(self) -> list:
+    def loans_actives(self) -> list:
         """
-        Get all media purchased
+        Get all media loans_actives
         """
 
-        res = self._req(endpoint="/loans/loans/actives/?order_by=-recent&page_size=5&page=1")
+        #res = self._req(endpoint="/loans/loans/actives/?order_by=-recent&page_size=5&page=1")
+        res = self._req(endpoint="/loans/loans/actives/")
         return res 
 
     def highlighteds(self) -> list:
@@ -225,19 +226,33 @@ class Api:
         res = self._req(f"/user/playlists/{playlist_id}/medias")
         return res["data"]
 
-    def media_simple(self, item_id: int):
+    def loan(self, item_id: int):
         """
         Get details of media
         """
-        res = self._req(endpoint=f"/media/{item_id}/simple")
-        return res["data"]
+        res = self._req(endpoint=f"/loans/loans/{item_id}/")
+        return res
+    
+    def loan_displays(self, item_id: int):
+        """
+        Get details of media
+        """
+        res = self._req(endpoint=f"/loans/displays/",
+                        body={
+                            "loan": item_id
+                        })
+        return res
+    
+    def videos_audiovisuals(self, id: int):
+        res = self._req(endpoint=f"/videos/audiovisuals/{id}/")
+        return res
 
     def seasons(self, item_id: int):
         """
         Get all seasons of a show
         """
 
-        res = self.media_simple(item_id)
+        res = self.loan(item_id)
         return res["seasons"]["data"]
 
     def episodes(self, item_id: int, season_id: int):
@@ -268,25 +283,31 @@ class Api:
 
         self._req(endpoint="/user/tickets/activate", body={"id": item_id})
 
-    def streams(self, item_id: int) -> dict:
+    #def streams(self, item_id: int) -> dict:
+    def streams(self, item_displays) -> dict:
         """
         Get all media versions available (dubbed, subtitled...)
         """
 
-        res = self._req(endpoint=f"/version/{item_id}")
+        #res = self._req(endpoint=f"/version/{item_id}")
+        
         streams = {}
         # -- Single feed -- #
-        if "feeds" not in res:
-            if not is_drm(res.get("type", "FLVURL")):
-                # Add support for v1 (DRM-Free) video
-                res["src"] = res.get("FLVURL") or res.get("src")
-                res["type"] = "FLVURL"
+        if "feeds" not in item_displays:
+            # todo
+            # if not is_drm(res.get("type", "FLVURL")):
+            #     # Add support for v1 (DRM-Free) video
+            #     res["src"] = res.get("FLVURL") or res.get("src")
+            #     res["type"] = "FLVURL"
 
             # We have to convert it to the multi-feed response
+            # streams = {
+            #     "feeds": [res],
+            #     "media_viewing_id": res["media_viewing_id"],
+            #     "xml": res["xml"],
+            # }
             streams = {
-                "feeds": [res],
-                "media_viewing_id": res["media_viewing_id"],
-                "xml": res["xml"],
+                "feeds": [item_displays]
             }
         # -- More than one feed -- #
         else:

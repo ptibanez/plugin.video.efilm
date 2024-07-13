@@ -7,10 +7,10 @@ from ..common import _HANDLE, _PARAMS, _URL
 from ..constants import Routes, MediaTypes
 from .misc import build_kodi_url
 from .listitem_extra import ListItemExtra
-
+from ..models.video import Video
 
 class Render:
-    """Helper for Kodi menu building from Filmin data"""
+    """Helper for Kodi menu building from eFilm data"""
 
     @staticmethod
     def static(items: list) -> list:
@@ -41,8 +41,13 @@ class Render:
                 "route": Routes.PLAYER.value,
                 "id": item["id"]
             })
-
-            list_item = ListItemExtra.video(url, item)
+            video = Video(name = item["name_product"], 
+                          cover = item["cover"],
+                          expire = item["expire"],
+                          subinfo = item["subinfo"],
+                          director = item["subinfo"]["director"],
+                          year = None)
+            list_item = ListItemExtra.video(url, video)
             listing.append((url, list_item, False))
         return listing
 
@@ -52,7 +57,7 @@ class Render:
         route: str = ""
     ) -> list:
         """
-        Render folders fetched from Filmin API
+        Render folders fetched from eFilm API
         """
 
         listing = []

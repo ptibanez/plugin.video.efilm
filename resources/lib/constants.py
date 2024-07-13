@@ -27,9 +27,7 @@ class Routes(Enum):
 class MediaTypes(Enum):
     """List of available media types"""
 
-    #VIDEOS = ("short", "film", "episode")
     VIDEOS = ("serie", "audiovisual")
-    #FOLDERS = ("serie", "season")
     FOLDERS = ("season")
 
 
