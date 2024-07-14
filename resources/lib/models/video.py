@@ -6,9 +6,10 @@ from dataclasses import dataclass
 class Video:
     """Wrapper for all data needed for Video"""
 
-    name: str
+    title: str
     year: int
     director: str
     cover: str
     subinfo: dict
     expire: str
+    plot: str

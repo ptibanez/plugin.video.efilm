@@ -12,33 +12,16 @@ class ListItemExtra:
     """Helper for ListItem generation from eFilm data"""
     
     @staticmethod
-    def subinfoToStr(subinfo: dict) -> str:
-        subinfoToStr = ""
-        for key, value in subinfo.items():
-            keyTranslated = settings.get_localized_string(sum(map(ord, hashlib.md5(key.encode('utf-8')).hexdigest())) + 40053)
-            subinfoToStr += f' - {keyTranslated}: {value}'
-        return subinfoToStr
-    
-    @staticmethod
-    def expireToStr(expire: str) -> str:
-        return " - vence: " + datetime.fromisoformat(expire).strftime("%d/%m/%Y a las %H:%M")
-
-    @staticmethod
     def video(url: str, video: Video) -> ListItem:
         """ListItem for individual video"""
-        list_item = ListItem(video.name, path=url)
+        list_item = ListItem(video.title, path=url)
         
-        title = video.name
-        if video.subinfo:
-           title += ListItemExtra.subinfoToStr(video.subinfo)
-           
-        if video.expire:
-           title += ListItemExtra.expireToStr(video.expire)  
+
         
         info = {
-            "title": title,
+            "title": video.title,
             "year": video.year,
-            "plot": "probando",
+            "plot": video.plot,
             "director": video.director
             #"rating": item["avg_votes"],
             # Filmin returns duration in minutes, Kodi wants it in seconds
