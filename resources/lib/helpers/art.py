@@ -9,13 +9,13 @@ class Art:
     @staticmethod
     def api(video: Video) -> dict:
         
-        thumb = video.cover
-        poster = video.cover
-        fanart = video.cover
-        banner = video.cover
-        landscape = video.cover
-        icon = video.cover
-        highlighted = video.cover
+        thumb = video.poster
+        poster = video.poster
+        fanart = video.fanart
+        banner = video.fanart
+        landscape = video.poster
+        icon = video.poster
+        highlighted = video.poster
 
         if highlighted is not None:
             if banner is None:

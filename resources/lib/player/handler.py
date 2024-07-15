@@ -18,53 +18,52 @@ class PlayHandler:
     Rents media if it needs to and chooses a valid stream
     """
 
-    PROTOCOL = "mpd"
-    DRM = "com.widevine.alpha"
     item = {}
-    item_displays = {}
-    can_watch = True
-    can_buy = True
+
+    #can_watch = True
+    #can_buy = True
 
     def __init__(self, el_id: int):
-        self.item = api.loan(el_id)
+        #self.item = api.loan(el_id)
         # if "can_watch" in self.item["user_data"]:
         #     can_watch = self.item["user_data"]["can_watch"]
         #     self.can_watch = len(can_watch["data"]) > 0
-        can_watch = self.item["enabled"]
-        can_buy = self.item["remaining_loans"] > 0
+        #can_watch = self.item["enabled"]
+        #can_buy = self.item["remaining_loans"] > 0
+        self.item = api.videos_audiovisuals(el_id)
 
-    def buy_media(self):
-        """
-        Asks user if they want to buy media, send request if true
-        """
-        print("TODO buy_media")
+    # def buy_media(self):
+    #     """
+    #     Asks user if they want to buy media, send request if true
+    #     """
+    #     print("TODO buy_media")
+    #
+    #     user = api.user()
+    #     tickets = len(user["tickets"]["data"])
+    #     self.can_watch = Dialog().yesno(
+    #         settings.get_localized_string(40050),
+    #         settings.get_localized_string(40051) % tickets,
+    #     )
+    #     if self.can_watch:
+    #         api.use_tickets(self.item["id"])
 
-        user = api.user()
-        tickets = len(user["tickets"]["data"])
-        self.can_watch = Dialog().yesno(
-            settings.get_localized_string(40050),
-            settings.get_localized_string(40051) % tickets,
-        )
-        if self.can_watch:
-            api.use_tickets(self.item["id"])
-
-    def version_picker(self, item_displays: dict) -> dict:
-        """
-        Return version that user selects
-        """
-        versions_api = item_displays["languages"]
-
-        v_show = []
-        for v_tmp in versions_api:
-            label = f"{v_tmp['language']['name']} - {v_tmp['subtitle']['name']}"
-            list_item = ListItem(label=label)
-            v_show.append(list_item)
-    
-        index = Dialog().select(settings.get_localized_string(40052), v_show)
-        if index == -1:
-            return None
-        else:
-            return versions_api[index]
+    # def version_picker(self, item_displays: dict) -> dict:
+    #     """
+    #     Return version that user selects
+    #     """
+    #     versions_api = item_displays["languages"]
+    #
+    #     v_show = []
+    #     for v_tmp in versions_api:
+    #         label = f"{v_tmp['language']['name']} - {v_tmp['subtitle']['name']}"
+    #         list_item = ListItem(label=label)
+    #         v_show.append(list_item)
+    #
+    #     index = Dialog().select(settings.get_localized_string(40052), v_show)
+    #     if index == -1:
+    #         return None
+    #     else:
+    #         return versions_api[index]
 
     def start(self):
         """
@@ -72,19 +71,20 @@ class PlayHandler:
         """
 
         #if not self.can_watch and settings.can_buy():
-        if not self.can_watch and self.can_buy():
-            self.buy_media()
-
-        if not self.can_watch:
-            Dialog().ok("Error", settings.get_localized_string(40053))
-            return
+        # if not self.can_watch and self.can_buy():
+        #     self.buy_media()
+        #
+        # if not self.can_watch:
+        #     Dialog().ok("Error", settings.get_localized_string(40053))
+        #     return
         
-        loan_displays = api.loan_displays(self.item["id"])
+        #loan_displays = api.loan_displays(self.item["id"])
+        #info = api.videos_audiovisuals(self.item["id"])
 
-        version = self.version_picker(loan_displays)
-        
-        if version is None:
-            return
+        # version = self.version_picker(self.item)
+        #
+        # if version is None:
+        #     return
 
         # Handle subtitles todo
         # subtitles_api = version["subtitles"]["data"]
@@ -96,37 +96,16 @@ class PlayHandler:
         #streams = api.streams(version["id"])
         #streams = api.streams(item_displays)
         #stream = streams["feeds"][0]
-        stream = loan_displays["player"]["source"]
+        #stream = loan_displays["player"]["source"]
+        stream = self.item["url_embedded"]
 
         # Handle PlayItem
-        video = Video(name = loan_displays["name"],
-                      year = loan_displays["year"],
-                      cover = loan_displays["cover"],
-                      director = loan_displays["director"],
-                      subinfo = None,
-                      expire = None)
+        
+        video = Video(self.item)
+        
         play_item = ListItemExtra.video(stream, video)
         
-        #play_item.setSubtitles(subtitles)
-
-        # todo Handle DRM
-        # if is_drm(self.item_displays["player_name"]):
-        #     # pylint: disable-next=import-error,import-outside-toplevel
-        #     import inputstreamhelper
-        #
-        #     is_helper = inputstreamhelper.Helper(self.PROTOCOL, drm=self.DRM)
-        #     if not is_helper.check_inputstream():
-        #         # Couldn't get inputstream working :(
-        #         raise DRMException()
-        #
-        #     play_item.setProperty("inputstream", is_helper.inputstream_addon)
-        #     play_item.setProperty(
-        #         "inputstream.adaptive.manifest_type", self.PROTOCOL)
-        #     play_item.setProperty(
-        #         "inputstream.adaptive.license_type", self.DRM)
-        #     play_item.setProperty(
-        #         "inputstream.adaptive.license_key",
-        #         stream["license_url"] + "||R{SSM}|")
+        # play_item.setSubtitles(subtitles)
 
         # Start playing
         monitor = Monitor()

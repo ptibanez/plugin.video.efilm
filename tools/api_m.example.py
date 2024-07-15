@@ -21,13 +21,13 @@ DOMAIN = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 api = Api(DOMAIN)
 
 # .. You can keep testing the api here
-username = ""
-password = ""
+username = "28624546"
+password = "190546"
 login = api.login(username, password)
 api.set_token(login["access"])
 loans_actives = api.loans_actives()
-loan_id = loans_actives[0]["id"]
-loan = api.loan(loan_id)
+loan = loans_actives[0]
+#loan = api.loan(loan_id)
 #loan_displays = api.loan_displays(loan_id)
 product_id = loan["product"]
 product_type = loan["product_type"]
@@ -35,4 +35,7 @@ if product_type == "audiovisual":
     info = api.videos_audiovisuals(product_id)
 
 prettyPrint(info)
+
+#print(info)
+       
 

@@ -41,12 +41,6 @@ class Render:
                 "route": Routes.PLAYER.value,
                 "id": item["id"]
             })
-            # video = Video(name = item["name_product"], 
-            #               cover = item["cover"],
-            #               expire = item["expire"],
-            #               subinfo = item["subinfo"],
-            #               director = item["subinfo"]["director"],
-            #               year = None)
             list_item = ListItemExtra.video(url, item)
             listing.append((url, list_item, False))
         return listing

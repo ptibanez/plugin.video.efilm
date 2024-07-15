@@ -16,17 +16,16 @@ class ListItemExtra:
         """ListItem for individual video"""
         list_item = ListItem(video.title, path=url)
         
-
-        
         info = {
-            "title": video.title,
-            "year": video.year,
-            "plot": video.plot,
-            "director": video.director
-            #"rating": item["avg_votes"],
-            # Filmin returns duration in minutes, Kodi wants it in seconds
-            #"duration": item["duration_in_minutes"] * 60,
-            
+             "title": video.title,
+             "year": video.year,
+             "plot": video.plot,
+             "director": video.director,
+             "genre": video.genre
+        #     #"rating": item["avg_votes"],
+        #     # Filmin returns duration in minutes, Kodi wants it in seconds
+        #     #"duration": item["duration_in_minutes"] * 60,
+        #
         }
         list_item.setInfo("video", info)
         # ART
@@ -60,36 +59,4 @@ class ListItemExtra:
 
         return list_item
 
-    # @staticmethod
-    # def folder_uapi(url: str, item: dict) -> ListItem:
-    #     """Folder uapi flavour"""
-    #
-    #     list_item = ListItem(item["title"], path=url)
-    #     info = {
-    #         "title": item["title"],
-    #         "year": item["year"],
-    #         "plot": item["excerpt"],
-    #         "director": item["director_names"],
-    #         "rating": item["avg_votes"],
-    #         # Filmin returns duration in minutes, Kodi wants it in seconds
-    #         "duration": item["duration_in_minutes"] * 60,
-    #     }
-    #
-    #     list_item.setInfo("video", info)
-    #
-    #     # ART
-    #     list_item.setArt(Art.uapi(item))
-    #     return list_item
-
-    # @staticmethod
-    # def folder_apiv3(url: str, item: dict) -> ListItem:
-    #     """Folder apiv3 flavour"""
-    #
-    #     list_item = ListItem(item["title"], path=url)
-    #     info = {"title": item["title"], "plot": item.get("excerpt")}
-    #     list_item.setInfo("video", info)
-    #     if "imageResources" in item:
-    #         art = Art.apiv3(item["imageResources"]["data"])
-    #         list_item.setArt(art)
-    #
-    #     return list_item
+    
