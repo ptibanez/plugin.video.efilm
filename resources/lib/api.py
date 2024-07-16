@@ -246,6 +246,10 @@ class Api:
     def videos_audiovisuals(self, id: int):
         res = self._req(endpoint=f"/videos/audiovisuals/{id}/")
         return res
+    
+    def videos_series(self, id: int):
+        res = self._req(endpoint=f"/videos/series/{id}/")
+        return res
 
     def seasons(self, item_id: int):
         """
@@ -268,13 +272,21 @@ class Api:
 
         return items
 
-    def watch_later(self) -> list:
+    def users_save_product(self) -> list:
         """
         Get all media added to watch later
         """
 
-        res = self._req(endpoint="/auth/watch-later", uapi=True)
-        return res["data"]
+        res = self._req(endpoint="/users/save-product/")
+        return res["results"]
+    
+    def users_save_collections(self) -> list:
+        """
+        Get all media added to watch later
+        """
+
+        res = self._req(endpoint="/users/save-collection/")
+        return res["results"]
 
     def use_tickets(self, item_id: int):
         """

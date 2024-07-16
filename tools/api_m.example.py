@@ -25,17 +25,17 @@ username = "28624546"
 password = "190546"
 login = api.login(username, password)
 api.set_token(login["access"])
-loans_actives = api.loans_actives()
-loan = loans_actives[0]
-#loan = api.loan(loan_id)
-#loan_displays = api.loan_displays(loan_id)
-product_id = loan["product"]
-product_type = loan["product_type"]
-if product_type == "audiovisual": 
-    info = api.videos_audiovisuals(product_id)
+#products = api.users_save_product()
+#info = api.videos_audiovisuals(saved[1]["product"])
+#print("\nPeliculas:")
+#prettyPrint(products)
+collections = api.users_save_collections()
+#info = api.videos_audiovisuals(saved[1]["product"])
+#print("\nSeries:")
+#prettyPrint(collections)
 
+info = api.videos_series(collections[0]["collection"])
+print("\nSerie:")
 prettyPrint(info)
-
-#print(info)
        
 

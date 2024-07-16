@@ -116,8 +116,8 @@ msgid "Playlists"
 msgstr "Listas de reproducción"
 
 msgctxt "#40027"
-msgid "Watch later"
-msgstr "Ver después"
+msgid "Saved"
+msgstr "Guardadas"
 
 # -- session.py -- #
 msgctxt "#40030"

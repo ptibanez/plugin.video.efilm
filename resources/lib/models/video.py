@@ -13,6 +13,7 @@ class Video:
     fanart: str
     plot: str
     genre: []
+    product_type: str
     
     def __init__(self, info: dict, expire: str = None):
         self.id = info["id"]               
@@ -22,7 +23,8 @@ class Video:
         self.poster = info["cover"]
         self.fanart = info["banner"]
         self.plot = info["description"]
-        self.genre = [genre["name"] for genre in info["genres"]]    
+        self.genre = [genre["name"] for genre in info["genres"]]
+        self.product_type = "audiovisual"
     
     def __getitem__(self, item):
         return getattr(self, item)
