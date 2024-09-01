@@ -1,7 +1,7 @@
 # eFilm Kodi
 
 (Fork de pablouser1/plugin.video.filmin).
-Reproduce tu contenido de eFilm favorito usando Kodi ≥ 19 (Matrix)
+Reproduce los préstamos de eFilm usando Kodi ≥ 19 (Matrix)
 
 ## Cómo instalar
 ### Manual

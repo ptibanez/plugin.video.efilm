@@ -21,21 +21,24 @@ DOMAIN = "ANDALUCÍA.EFILM Red de Bibliotecas Públicas de Andalucía"
 api = Api(DOMAIN)
 
 # .. You can keep testing the api here
-username = "28624546"
-password = "190546"
+username = ""
+password = ""
 login = api.login(username, password)
 api.set_token(login["access"])
-#products = api.users_save_product()
-#info = api.videos_audiovisuals(saved[1]["product"])
-#print("\nPeliculas:")
-#prettyPrint(products)
-collections = api.users_save_collections()
-#info = api.videos_audiovisuals(saved[1]["product"])
-#print("\nSeries:")
-#prettyPrint(collections)
+loans = api.loans_actives()
+pelicula = loans[0]
+print("\nPelícula:")
+prettyPrint(pelicula)
+#serie = loans[1]
+#print("\nSerie:")
+#prettyPrint(serie)
+pelicula_info = api.videos_audiovisuals(pelicula["product"])
+print("\nPelícula -> info:")
+prettyPrint(pelicula_info)
+#serie_info = api.videos_series(serie["collection_id"])
+#print("\nSerie -> info:")
+#prettyPrint(serie_info)
 
-info = api.videos_series(collections[0]["collection"])
-print("\nSerie:")
-prettyPrint(info)
+
        
 

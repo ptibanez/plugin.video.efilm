@@ -12,35 +12,6 @@ class MainMenu(Base):
     static = True
     items = [
         {
-            "id": Routes.SEARCH.value,
-            "title": settings.get_localized_string(40020)
-        },
-        {
-            "id": Routes.WATCHING.value,
-            "title": settings.get_localized_string(40021)
-        },
-        {
-            "id": Routes.CATALOG.value,
-            "title": settings.get_localized_string(40022)
-        },
-
-        {
-            "id": Routes.HIGHLIGHTEDS.value,
-            "title": settings.get_localized_string(40024),
-        },
-        {
-            "id": Routes.COLLECTIONS.value,
-            "title": settings.get_localized_string(40025)
-        },
-        {
-            "id": Routes.PLAYLISTS.value,
-            "title": settings.get_localized_string(40026)
-        },
-        {
-            "id": Routes.WATCHLATER.value,
-            "title": settings.get_localized_string(40027)
-        },
-        {
             "id": Routes.PURCHASED.value,
             "title": settings.get_localized_string(40023)
         }

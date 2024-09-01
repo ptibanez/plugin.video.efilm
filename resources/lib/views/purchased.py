@@ -13,11 +13,8 @@ class Purchased(Base):
     has_videos = True
 
     def set_items(self):
-        # remaining_loans = settings.get_remaining_loans()
-        # self.items = [{"id": 1, "name_product": f"Te quedan {remaining_loans} préstamos", "product_type": ""}]
-        #self.items = api.loans_actives()
         # convert to video info
-        items = filter(lambda x: x["active"], api.loans_actives())
+        items = filter(lambda x: (x["active"] and x["product_type"] == "audiovisual"), api.loans_actives())
         for item in items:
             info = api.videos_audiovisuals(item["product"])
             video = Video(info, item["expire"])

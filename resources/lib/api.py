@@ -163,7 +163,6 @@ class Api:
         Get all media loans_actives
         """
 
-        #res = self._req(endpoint="/loans/loans/actives/?order_by=-recent&page_size=5&page=1")
         res = self._req(endpoint="/loans/loans/actives/")
         return res 
 
